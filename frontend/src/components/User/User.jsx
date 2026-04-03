@@ -3,14 +3,13 @@ import axios from "axios";
 
 export default function PredictPage() {
   const [form, setForm] = useState({
-    temperature_C: "",
-    humidity_pct: "",
-    soil_moisture_pct: "",
-    rainfall_mm: "",
     soil_type: "",
-    crop_type: "",
-    pest_severity_score: "",
-    disease_severity_score: ""
+    soil_pH: "",
+    alert_level:"",
+    field_area_ha:"",
+    temperature_avg_C: "",
+    humidity_pct: "",
+    rainfall_mm: "",
   });
 
   const [result, setResult] = useState(null);
