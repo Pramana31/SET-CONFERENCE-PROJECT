@@ -1,6 +1,9 @@
 import { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Authcontext";
+import eyeOpen from "../../assets/eye-open.png";
+import eyeClosed from "../../assets/eye-closed.png";
+
 function Login() {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
@@ -8,7 +11,7 @@ function Login() {
     email: "",
     password: "",
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const handleChange = (e) => {
     setForm({
       ...formdata,
@@ -92,14 +95,23 @@ function Login() {
           className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
         />
 
-        {/* Password */}
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          className="w-full border p-3 mb-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-        />
+        {/* Password with Eye Toggle */}
+        <div className="relative mb-3">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            className="w-full border p-3 pr-12 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          />
+
+          <img
+            src={showPassword ? eyeOpen : eyeClosed}
+            alt="toggle password"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-3 w-6 h-6 cursor-pointer"
+          />
+        </div>
 
         {/* Forgot Password */}
         <p className="text-right text-sm mb-4">

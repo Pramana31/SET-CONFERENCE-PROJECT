@@ -1,5 +1,7 @@
 import { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import eyeOpen from "../../assets/eye-open.png";
+import eyeClosed from "../../assets/eye-closed.png";
 
 function Register() {
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ function Register() {
     email: "",
     password: "",
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const handlechange = (e) => {
     setForm({
       ...formdata,
@@ -128,15 +130,23 @@ function Register() {
           className="w-full border p-3 mb-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
         />
 
-        {/* Password */}
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formdata.password}
-          onChange={handlechange}
-          className="w-full border p-3 mb-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-        />
+        {/* Password with eye toggle*/}
+        <div className="relative mb-3">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            onChange={handlechange}
+            className="w-full border p-3 pr-12 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          />
+        
+          <img
+            src={showPassword ? eyeOpen : eyeClosed}
+            alt="toggle password"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-3 w-6 h-6 cursor-pointer"
+          />
+        </div>
 
         {/* Button */}
         <button
